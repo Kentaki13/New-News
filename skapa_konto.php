@@ -1,14 +1,4 @@
-<?php
-/**
-* Hemsidan
-*
-* PHP version 5
-* @category   Webbtjänst
-* @author     Karim Ryde <karye.webb@gmail.com>
-* @license    PHP CC
-* @link
-*/
-?>
+
 <?php
 session_start();
 if (!isset($_SESSION["loggedin"])) {
@@ -45,7 +35,7 @@ if (!isset($_SESSION["loggedin"])) {
             </header>
         <div class="kontainer">
             <main>
-                <form action="min_sida.php" class="kolumner" data-toggle="modal" method="post">
+                <form action="min_sida.php" class="kolumner"  method="post">
                     <div>
                         <label>Förnamn</label>
                         <input class="form-control" type="text" name="fnamn" required>
@@ -92,7 +82,7 @@ if (!isset($_SESSION["loggedin"])) {
     include "includes/inloggningsruta.php";
     include "includes/frameworks.php";
 ?>
-        <script src="js/confirm.js"></script>
+        <script src="js/login.js"></script>
     </body>
 
     </html>

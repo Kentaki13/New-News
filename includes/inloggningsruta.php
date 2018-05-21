@@ -1,4 +1,3 @@
-
 <!-- Modal HTML -->
         <div id="myModal" class="modal fade">
             <div class="modal-dialog modal-login">
@@ -19,6 +18,7 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block login-btn" name="logga_in" id="logga_in">Logga in</button>
+
                             <a href="skapa_konto.php">Inte medlem? Skapa konto här!</a>
                         </div>
                     </form>

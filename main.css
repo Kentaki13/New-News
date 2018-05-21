@@ -43,21 +43,21 @@ h1 {
     text-decoration: none;
     font-family: 'Abril Fatface', cursive;
 }
-nav {
+header nav {
     width: 1100px;
     margin: auto;
 
 }
-ul {
+header ul {
     list-style-type: none;
     overflow: hidden;
     background-color: #333;
     border-radius: 10px 10px 20px 20px;
 }
-li {
+header li {
     float: left;
 }
-li a {
+header li a {
     display: block;
     color: white;
     text-align: center;
@@ -184,7 +184,7 @@ main button {
     margin-left: 5px;
 }
 .kontainer {
-    width: 960px;
+    width: 1100px;
     margin:auto;
     background: grey;
 }
@@ -194,3 +194,36 @@ main button {
     padding: 30px;
     grid-gap: 30px;
 }
+.kolumner_minsida {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-gap: 0px;
+}
+main nav {
+    background: #333;
+    padding: 30px;
+    margin-top: 100px;
+    height: 250px;
+}
+main nav h3 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #16466c;
+}
+main nav li {
+    list-style-type: none;
+    margin-bottom: 20px;
+}
+main nav a {
+    color: #FFF;
+    font-weight: bold;
+    font-size: 18px;
+    font-style: italic;
+    padding: 0 20px 0 0;
+}
+main nav a:hover, main nav a.aktuell {
+    color: #FF0000;
+    text-decoration-line: underline;
+}
+
+

@@ -76,8 +76,8 @@ if (isset($_POST["registrera"])) {
     <div class="kontainer">
         <header>
             <h1><a href="index.php">Public News</a></h1>
-            <nav >
-                <ul >
+            <nav>
+                <ul>
                     <li><a href="index.php" style="margin-left: 420px">Hem</a></li>
                     <li><a href="kultur.php">Kultur</a></li>
                     <li><a href="noje.php">Nöje</a></li>
@@ -95,8 +95,8 @@ if (isset($_POST["registrera"])) {
             <nav>
                 <h3><?php echo $_SESSION["anamn"] ?></h3>
                 <ul>
-                    <li><a class="aktuell" href="mina_inlagg.php">Mina Inlägg</a></li>
-                    <li><a href="min_sida_skapa_inlagg.php">Skapa inlägg</a></li>
+                    <li><a  href="mina_inlagg.php">Mina Inlägg</a></li>
+                    <li><a href="min_sida_skapa_inlagg.php" class="aktuell">Skapa inlägg</a></li>
                     <li><a href="index.php?loggaut=1">Logga ut</a></li>
                 </ul>
             </nav>
