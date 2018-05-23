@@ -87,7 +87,7 @@ if (!$_SESSION["loggedin"]) {
             </div>
                 </div>
             </main>
-            <footer id="roll">
+            <footer>
     <div class="roll">
         <p id="info"></p>
         </div>

@@ -20,7 +20,53 @@ if (!isset($_SESSION["loggedin"])) {
 
 
 </head>
+<?php
+include '../../config_db/konfig_db_resedagboken.php';
 
+/* Ta emot data från skapa_konto.php och lagra i databasen */
+/* Visa medlemssidan */
+
+// Vi försöker öppna en anslutningen mot vår databas
+$conn = new mysqli($hostname, $user, $password, $database);
+
+// Gick det bra att ansluta eller blev det fel?
+if ($conn->connect_error) {
+    die("<p>Ett fel inträffade: " . $conn->connect_error . "</p>");
+}
+
+if (isset($_POST["registrera"])) {
+
+    // Tar emot data från formulär och rensar bort oönskade taggar eller kod
+    $rubrik = filter_input(INPUT_POST, "rubrik", FILTER_SANITIZE_STRING);
+    $text = filter_input(INPUT_POST, "text", FILTER_SANITIZE_STRING);
+
+    $epost = filter_input(INPUT_POST, "epost", FILTER_SANITIZE_STRING);
+
+
+    // Om data finns skjut i databasen
+    if ($rubrik && $text) {
+
+
+        // Registrera en ny användare
+        $sql = "INSERT INTO nyheter
+        (rubrik, text) VALUES
+        ('$rubrik', '$text')";
+
+        // Nu kör vi vår SQL
+        $result = $conn->query($sql);
+
+        // Gick det bra att köra SQL-kommandot?
+        if (!$result) {
+            die("<p>Det blev något fel i databasfrågan</p>");
+        }
+
+        $_SESSION["rubrik"] = $rubrik;
+        $_SESSION["text"] = $text;
+        // Stänger ned anslutningen
+        $conn->close();
+    }
+}
+?>
 <body>
     <header>
         <h1><a href="index.php">Public News</a></h1>
@@ -84,11 +130,20 @@ if (!$_SESSION["loggedin"]) {
                 <p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text</p>
                 <button>Läs mer</button>
             </div>
-            <div class="nyhet">
-            <h2>Rubrik</h2>
-                <p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text</p>
+                <?php
+
+   echo(  "<div class=\"nyhet\">
+            <h2>" .$_SESSION["rubrik"] . "</h2>
+                <p>$text</p>
                 <button>Läs mer</button>
-            </div>
+            </div>");?>
+                <?php
+
+   echo(  "<div class=\"nyhet\">
+            <h2>" .$_SESSION["rubrik"] . "</h2>
+                <p>$text</p>
+                <button>Läs mer</button>
+            </div>");?>
                 </div>
             </main>
             <footer id="roll">

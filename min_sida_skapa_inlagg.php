@@ -83,11 +83,6 @@ if (isset($_POST["registrera"])) {
                     <li><a href="noje.php">Nöje</a></li>
                     <li><a href="sport.php">Sport</a></li>
                     <li style="float:right; margin-right:50px"><a class="active" href="min_sida.php">Min sida <i class="fas fa-lock-open"></i></a></li>
-                    <li>
-                        <form>
-
-                        </form>
-                    </li>
                 </ul>
             </nav>
         </header>
@@ -100,7 +95,15 @@ if (isset($_POST["registrera"])) {
                     <li><a href="index.php?loggaut=1">Logga ut</a></li>
                 </ul>
             </nav>
-
+<form action="index.php" class="kolumner"  method="post">
+                    <div>
+                        <label>Rubrik</label>
+                        <input class="form-control" type="text" name="rubrik" required><br>
+                        <label>Text</label>
+                        <textarea class="form-control" rows="5" cols="5"  type="text" name="text" required></textarea>
+                        <button class="btn btn-primary login-btn" name="registrera"
+                        >Registrera</button>
+    </div></form>
         </main>
         <footer class="kolumner">
             <div>
