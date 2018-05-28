@@ -65,27 +65,49 @@ if (!$_SESSION["loggedin"]) {
             </div>
             <script src="slideshow.js"></script>
             <div class="nyheter">
-            <div class="nyhet">
-            <h2>Rubrik</h2>
-                <p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text</p>
-                <button>Läs mer</button>
-            </div>
-            <div class="nyhet">
-            <h2>Rubrik</h2>
-                <p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text</p>
-                <button>Läs mer</button>
-            </div>
-            <div class="nyhet">
-            <h2>Rubrik</h2>
-                <p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text</p>
-                <button>Läs mer</button>
-            </div>
-            <div class="nyhet">
-            <h2>Rubrik</h2>
-                <p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text</p>
-                <button>Läs mer</button>
-            </div>
+                  <?php
+
+include '../../config_db/konfig_db_resedagboken.php';
+
+                /* Connect to the database */
+                $conn = new mysqli($hostname, $user, $password, $database);
+
+                /* Display an error if connection failed */
+                if ($conn->connect_error) {
+                    die("<p>An error occurred: " . $conn->connect_error . "</p>");
+                }
+
+                // Search the table tb_projects for projects linked to the user
+                $sql = "SELECT * FROM nyheter WHERE typ = 'noje'";
+
+                // Run SQL
+                $query = mysqli_query($conn, $sql);
+
+                // Display an error if SQL failed
+                if (!$query) {
+	               die ('SQL Error: ' . mysqli_error($conn));
+                }
+
+                ?>
+                <div>
+
+                            <?php
+
+                            while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)){
+
+
+            echo  "<div class=\"nyhet\">
+            <h2>" .$row['rubrik'] . "</h2>
+                <p>" .$row['text'] . "</p>
+            </div>";
+
+
+                            }
+                            // Shut down connection
+                            $conn->close();
+                            ?></div>
                 </div>
+
             </main>
             <footer id="roll">
     <div class="roll">

@@ -126,19 +126,22 @@ main {
     height: 200px;
 }
 .nyheter {
-  display: flex;
-  flex-wrap: wrap;
   background-color:grey;
   margin-top: 30px;
+    text-align: center;
+    margin-bottom: 120px;
 }
 
 .nyheter .nyhet {
   background-color: #f1f1f1;
   width: 300px;
   text-align: center;
-  margin: auto;
   padding: 5px;
-    margin-bottom: 10px;
+    display: inline-block;
+    margin: 20px;
+}
+.nyhet h2{
+    text-transform: uppercase;
 }
 .nyhet p {
     line-height: 1;
@@ -227,5 +230,9 @@ main nav a:hover, main nav a.aktuell {
     color: #FF0000;
     text-decoration-line: underline;
 }
+#userHidden {
+    visibility: hidden;
+}
+
 
 

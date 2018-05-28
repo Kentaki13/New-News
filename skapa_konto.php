@@ -22,7 +22,7 @@ if (!isset($_SESSION["loggedin"])) {
     <body>
 
             <header>
-                <h1><a href="index.php">New News</a></h1>
+                <h1><a href="index.php">Public News</a></h1>
                 <nav>
                     <ul>
                         <li><a href="index.php" style="margin-left: 420px">Hem</a></li>

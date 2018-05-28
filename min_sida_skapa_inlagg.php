@@ -90,7 +90,7 @@ if (isset($_POST["registrera"])) {
             <nav>
                 <h3><?php echo $_SESSION["anamn"] ?></h3>
                 <ul>
-                    <li><a  href="mina_inlagg.php">Mina Inlägg</a></li>
+                    <li><a  href="min_sida.php">Mina Inlägg</a></li>
                     <li><a href="min_sida_skapa_inlagg.php" class="aktuell">Skapa inlägg</a></li>
                     <li><a href="index.php?loggaut=1">Logga ut</a></li>
                 </ul>
@@ -101,9 +101,70 @@ if (isset($_POST["registrera"])) {
                         <input class="form-control" type="text" name="rubrik" required><br>
                         <label>Text</label>
                         <textarea class="form-control" rows="5" cols="5"  type="text" name="text" required></textarea>
+                        <input type="text" name="user" id="userHidden" value="<?php echo $_SESSION["anamn"] ?>">
+                        <label>Allt</label>
+                        <input type="radio" value="all" name="typ">
+                        <label>Kultur</label>
+                        <input type="radio" value="kultur" name="typ">
+                        <label>Nöje</label>
+                        <input type="radio" value="noje" name="typ">
+                        <label>Sport</label>
+                        <input type="radio" value="sport" name="typ">
                         <button class="btn btn-primary login-btn" name="registrera"
                         >Registrera</button>
     </div></form>
+
+<div class="nyheter">
+<?php
+
+include '../../config_db/konfig_db_resedagboken.php';
+
+                /* Connect to the database */
+                $conn = new mysqli($hostname, $user, $password, $database);
+
+                /* Display an error if connection failed */
+                if ($conn->connect_error) {
+                    die("<p>An error occurred: " . $conn->connect_error . "</p>");
+                }
+
+                // Search the table tb_projects for projects linked to the user
+                $sql = "SELECT * FROM nyheter WHERE user = '{$_SESSION["anamn"]}'";
+
+                // Run SQL
+                $query = mysqli_query($conn, $sql);
+
+                // Display an error if SQL failed
+                if (!$query) {
+	               die ('SQL Error: ' . mysqli_error($conn));
+                }
+
+                ?>
+                <div>
+
+                            <?php
+
+                            while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)){
+
+
+            echo  "<div class=\"nyhet\">
+            <h2>" .$row['rubrik'] . "</h2>
+                <p>" .$row['text'] . "</p>
+            </div>";
+
+
+                            }
+                            // Shut down connection
+                            $conn->close();
+                            ?></div>
+
+
+
+
+
+
+
+
+            </div>
         </main>
         <footer class="kolumner">
             <div>

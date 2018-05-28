@@ -1,7 +1,8 @@
 
 <?php
 session_start();
-if (!isset($_SESSION["loggedin"])) {
+
+if (!isset($_SESSION["loggedin"]) || isset($_GET["loggaut"])) {
     $_SESSION["loggedin"] = false;
 }
 ?>
@@ -39,18 +40,17 @@ if (isset($_POST["registrera"])) {
     // Tar emot data från formulär och rensar bort oönskade taggar eller kod
     $rubrik = filter_input(INPUT_POST, "rubrik", FILTER_SANITIZE_STRING);
     $text = filter_input(INPUT_POST, "text", FILTER_SANITIZE_STRING);
-
-    $epost = filter_input(INPUT_POST, "epost", FILTER_SANITIZE_STRING);
+    $typ = filter_input(INPUT_POST, "typ", FILTER_SANITIZE_STRING);
 
 
     // Om data finns skjut i databasen
-    if ($rubrik && $text) {
+    if ($rubrik && $text && $typ) {
 
 
         // Registrera en ny användare
         $sql = "INSERT INTO nyheter
-        (rubrik, text) VALUES
-        ('$rubrik', '$text')";
+        (rubrik, text, typ) VALUES
+        ('$rubrik', '$text', '$typ')";
 
         // Nu kör vi vår SQL
         $result = $conn->query($sql);
@@ -62,6 +62,7 @@ if (isset($_POST["registrera"])) {
 
         $_SESSION["rubrik"] = $rubrik;
         $_SESSION["text"] = $text;
+        $_SESSION["typ"] = $text;
         // Stänger ned anslutningen
         $conn->close();
     }
@@ -82,7 +83,7 @@ if (!$_SESSION["loggedin"]) {
     echo "<li style=\"float:right;margin-right:50px\"><a href=\"#myModal\" class=\"trigger-btn\" data-toggle=\"modal\">Logga in <i class=\"fas fa-lock\"></i></a></li>";
     echo "<li><a href=\"skapa_konto.php\">Skapa konto</a></li>";
 } else {
-    echo "<li style=\"float:right;margin-right:50px\"><a class=\"aktuell\" href=\"min_sida.php\">Min sida </a></li>";
+    echo "<li style=\"float:right;margin-right:50px\"><a class=\"aktuell\" href=\"min_sida.php\">Min sida <i class=\"fas fa-lock-open\"></i></a></li>";
 }
 ?>
 
@@ -115,36 +116,56 @@ if (!$_SESSION["loggedin"]) {
             </div>
             <script src="slideshow.js"></script>
             <div class="nyheter">
-            <div class="nyhet">
-            <h2>Rubrik</h2>
-                <p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text</p>
-                <button>Läs mer</button>
-            </div>
-            <div class="nyhet">
-            <h2>Rubrik</h2>
-                <p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text</p>
-                <button>Läs mer</button>
-            </div>
-            <div class="nyhet">
-            <h2>Rubrik</h2>
-                <p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text v Text Text Text Text</p>
-                <button>Läs mer</button>
-            </div>
-                <?php
+<?php
 
-   echo(  "<div class=\"nyhet\">
-            <h2>" .$_SESSION["rubrik"] . "</h2>
-                <p>$text</p>
-                <button>Läs mer</button>
-            </div>");?>
-                <?php
+include '../../config_db/konfig_db_resedagboken.php';
 
-   echo(  "<div class=\"nyhet\">
-            <h2>" .$_SESSION["rubrik"] . "</h2>
-                <p>$text</p>
-                <button>Läs mer</button>
-            </div>");?>
-                </div>
+                /* Connect to the database */
+                $conn = new mysqli($hostname, $user, $password, $database);
+
+                /* Display an error if connection failed */
+                if ($conn->connect_error) {
+                    die("<p>An error occurred: " . $conn->connect_error . "</p>");
+                }
+
+                // Search the table tb_projects for projects linked to the user
+                $sql = "SELECT * FROM nyheter WHERE typ = 'all'";
+
+                // Run SQL
+                $query = mysqli_query($conn, $sql);
+
+                // Display an error if SQL failed
+                if (!$query) {
+	               die ('SQL Error: ' . mysqli_error($conn));
+                }
+
+                ?>
+                <div>
+
+                            <?php
+
+                            while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)){
+
+
+            echo  "<div class=\"nyhet\">
+            <h2>" .$row['rubrik'] . "</h2>
+                <p>" .$row['text'] . "</p>
+            </div>";
+
+
+                            }
+                            // Shut down connection
+                            $conn->close();
+                            ?></div>
+
+
+
+
+
+
+
+
+            </div>
             </main>
             <footer id="roll">
     <div class="roll">

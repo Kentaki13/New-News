@@ -95,7 +95,7 @@ if (isset($_POST["registrera"])) {
             <nav>
                 <h3><?php echo $_SESSION["anamn"] ?></h3>
                 <ul>
-                    <li><a class="aktuell" href="mina_inlagg.php">Mina Inlägg</a></li>
+                    <li><a class="aktuell" href="#">Mina Inlägg</a></li>
                     <li><a href="min_sida_skapa_inlagg.php">Skapa inlägg</a></li>
                     <li><a href="index.php?loggaut=1">Logga ut</a></li>
                 </ul>
