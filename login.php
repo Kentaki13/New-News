@@ -3,7 +3,7 @@ session_start();
 if (!isset($_SESSION["loggedin"]) || isset($_GET["loggaut"])) {
     $_SESSION["loggedin"] = false;
 }
-include_once '../../config_db/konfig_db_resedagboken.php';
+include_once '../../config_db/konfig_db_new_news.php';
 
 // Vi försöker öppna en anslutningen mot vår databas
 $conn = new mysqli($hostname, $user, $password, $database);

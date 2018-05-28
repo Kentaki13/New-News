@@ -22,7 +22,7 @@ if (!isset($_SESSION["loggedin"]) || isset($_GET["loggaut"])) {
 
 </head>
 <?php
-include '../../config_db/konfig_db_resedagboken.php';
+include '../../config_db/konfig_db_new_news.php';
 
 /* Ta emot data från skapa_konto.php och lagra i databasen */
 /* Visa medlemssidan */
@@ -81,7 +81,6 @@ if (isset($_POST["registrera"])) {
 <?php
 if (!$_SESSION["loggedin"]) {
     echo "<li style=\"float:right;margin-right:50px\"><a href=\"#myModal\" class=\"trigger-btn\" data-toggle=\"modal\">Logga in <i class=\"fas fa-lock\"></i></a></li>";
-    echo "<li><a href=\"skapa_konto.php\">Skapa konto</a></li>";
 } else {
     echo "<li style=\"float:right;margin-right:50px\"><a class=\"aktuell\" href=\"min_sida.php\">Min sida <i class=\"fas fa-lock-open\"></i></a></li>";
 }
@@ -97,11 +96,11 @@ if (!$_SESSION["loggedin"]) {
             <div class="slideshow-container">
                 <div class="mySlides">
                     <div class="numbertext">1 / 3</div>
-                    <img src="pictures/coop_reklam.gif">
+                    <img src="pictures/elgiganten.jpg">
                 </div>
                 <div class="mySlides">
                     <div class="numbertext">2 / 3</div>
-                    <img src="pictures/startbild.jpg" >
+                    <img src="pictures/linas-matkasse.jpg" >
                 </div>
                 <div class="mySlides">
                     <div class="numbertext">3 / 3</div>
@@ -114,11 +113,11 @@ if (!$_SESSION["loggedin"]) {
                 <span class="dot" onclick="currentSlide(2)"></span>
                 <span class="dot" onclick="currentSlide(3)"></span>
             </div>
-            <script src="slideshow.js"></script>
+            <script src="js/slideshow.js"></script>
             <div class="nyheter">
 <?php
 
-include '../../config_db/konfig_db_resedagboken.php';
+include '../../config_db/konfig_db_new_news.php';
 
                 /* Connect to the database */
                 $conn = new mysqli($hostname, $user, $password, $database);
@@ -174,7 +173,7 @@ include '../../config_db/konfig_db_resedagboken.php';
     </footer>
 
 
-    <script src="roll.js">
+    <script src="js/roll.js">
     </script>
 
 <?php

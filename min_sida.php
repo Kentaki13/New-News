@@ -20,7 +20,7 @@ if (!isset($_SESSION["loggedin"])) {
     <link rel="stylesheet" href="modal.css">
 </head>
 <?php
-include '../../config_db/konfig_db_resedagboken.php';
+include '../../config_db/konfig_db_new_news.php';
 
 /* Ta emot data från skapa_konto.php och lagra i databasen */
 /* Visa medlemssidan */
@@ -105,11 +105,11 @@ if (isset($_POST["registrera"])) {
         <footer class="kolumner">
             <div>
                 <h4>Info</h4>
-                <p>...</p>
+                <p>Samuel.gramenius@hotmail.com</p>
             </div>
             <div>
                 <h4>Kontakt</h4>
-                <p>...</p>
+                <p>+46-761 450450</p>
             </div>
         </footer>
     </div>

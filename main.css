@@ -78,7 +78,7 @@ li a:hover:not(.active) {
     margin: auto;
     position: relative;
     margin-top: 50px;
-}
+    box-shadow: 3px 3px 5px  #888888;}
 main {
     background: grey;
 }
@@ -223,7 +223,6 @@ main nav a {
     color: #FFF;
     font-weight: bold;
     font-size: 18px;
-    font-style: italic;
     padding: 0 20px 0 0;
 }
 main nav a:hover, main nav a.aktuell {
