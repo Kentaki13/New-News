@@ -1,5 +1,7 @@
 /*Fonts*/
 @import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 
 
 /* Enkel CSS-reset */
@@ -31,6 +33,7 @@ html {
     background: grey;
 }
 body {
+    font-family: 'Montserrat', sans-serif;
     background: grey;
     text-align: center;
 }
@@ -232,6 +235,7 @@ main nav a:hover, main nav a.aktuell {
 #userHidden {
     visibility: hidden;
 }
+
 
 
 

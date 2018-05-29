@@ -41,16 +41,17 @@ if (isset($_POST["registrera"])) {
     $rubrik = filter_input(INPUT_POST, "rubrik", FILTER_SANITIZE_STRING);
     $text = filter_input(INPUT_POST, "text", FILTER_SANITIZE_STRING);
     $typ = filter_input(INPUT_POST, "typ", FILTER_SANITIZE_STRING);
+    $user = filter_input(INPUT_POST, "user", FILTER_SANITIZE_STRING);
 
 
     // Om data finns skjut i databasen
-    if ($rubrik && $text && $typ) {
+    if ($rubrik && $text && $typ && $user) {
 
 
         // Registrera en ny användare
         $sql = "INSERT INTO nyheter
-        (rubrik, text, typ) VALUES
-        ('$rubrik', '$text', '$typ')";
+        (rubrik, text, typ, user) VALUES
+        ('$rubrik', '$text', '$typ', '$user')";
 
         // Nu kör vi vår SQL
         $result = $conn->query($sql);
@@ -63,6 +64,7 @@ if (isset($_POST["registrera"])) {
         $_SESSION["rubrik"] = $rubrik;
         $_SESSION["text"] = $text;
         $_SESSION["typ"] = $text;
+        $_SESSION["user"] = $user;
         // Stänger ned anslutningen
         $conn->close();
     }

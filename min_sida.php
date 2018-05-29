@@ -100,15 +100,65 @@ if (isset($_POST["registrera"])) {
                     <li><a href="index.php?loggaut=1">Logga ut</a></li>
                 </ul>
             </nav>
+<div class="nyheter">
+<?php
 
+include '../../config_db/konfig_db_new_news.php';
+
+                /* Connect to the database */
+                $conn = new mysqli($hostname, $user, $password, $database);
+
+                /* Display an error if connection failed */
+                if ($conn->connect_error) {
+                    die("<p>An error occurred: " . $conn->connect_error . "</p>");
+                }
+
+                // Search the table tb_projects for projects linked to the user
+                $sql = "SELECT * FROM nyheter WHERE user = '{$_SESSION["anamn"]}'";
+
+                // Run SQL
+                $query = mysqli_query($conn, $sql);
+
+                // Display an error if SQL failed
+                if (!$query) {
+	               die ('SQL Error: ' . mysqli_error($conn));
+                }
+
+                ?>
+                <div>
+
+                            <?php
+
+                            while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)){
+
+
+            echo  "<div class=\"nyhet\">
+            <h2>" .$row['rubrik'] . "</h2>
+                <p>" .$row['text'] . "</p>
+            </div>";
+
+
+                            }
+                            // Shut down connection
+                            $conn->close();
+                            ?></div>
+
+
+
+
+
+
+
+
+            </div>
         </main>
         <footer class="kolumner">
             <div>
-                <h4>Info</h4>
-                <p>Samuel.gramenius@hotmail.com</p>
+                <h4>Email</h4>
+                <a href="mailto:samuel.gramenius@hotmail.com">new@news.com</a>
             </div>
             <div>
-                <h4>Kontakt</h4>
+                <h4>Telefon</h4>
                 <p>+46-761 450450</p>
             </div>
         </footer>
